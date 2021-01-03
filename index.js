@@ -1,37 +1,139 @@
 //Default weather app api key: a7d000bc83452f91d1c5f98b2327ab5a
 
-//api.openweathermap.org/data/2.5/weather?q={city name},{state code}&appid={API key}
+//async function to pull the current Weather from openweathermap api
+async function pullWeatherObject() {
+  const weatherData = await fetch('https://api.openweathermap.org/data/2.5/onecall?lat=37.550201&lon=-121.980827&appid=a7d000bc83452f91d1c5f98b2327ab5a', {mode: 'cors'});
+  const weatherDataParsed = await weatherData.json();
+  // console.log(weatherDataParsed);
+  return weatherDataParsed;
+};
 
-//http://api.openweathermap.org/data/2.5/weather?q=London&APPID=a7d000bc83452f91d1c5f98b2327ab5a
-
-// console.log(api.openweathermap.org/data/2.5/weather?q=Fremont&appid=dcd81950142697b8720809fb2af52a9e);
-
-
-async function getWeather() {
-    //https://api.openweathermap.org/data/2.5/onecall?lat=37.550201&lon=-121.980827&appid=a7d000bc83452f91d1c5f98b2327ab5a
-    
-    // const weatherData = await fetch('http://api.openweathermap.org/data/2.5/weather?q=Redwood City, California&units=metric&APPID=a7d000bc83452f91d1c5f98b2327ab5a', {mode: 'cors'});
-    const weatherData = await fetch('https://api.openweathermap.org/data/2.5/onecall?lat=37.550201&lon=-121.980827&appid=a7d000bc83452f91d1c5f98b2327ab5a', {mode: 'cors'});
-    const weatherDataParsed = await weatherData.json();
-    console.log(weatherDataParsed);
+// converts unit from kelvin to farenheight
+const kelvinConverter = function(temp) {
+  return ((temp * (9/5)) - 459.67);
 }
 
-getWeather();
+// weather Description that we can edit
+const heatCategories = function() {
+  return {
+    hot: 90,
+    warm: 70,
+    neutral: 50,
+    chilly: 30,
+    freezing: -100,
+  }
+}();
 
-console.log(Geolocation.getCurrentPosition());
+// pull temperatureCat based on the temperature input
+const temperatureCategory = function(temperature, weatherDescription) {
+  //turn the temperature object into an array
+  const temps = Object.entries(weatherDescription);
 
-var cityName = document.getElementById('city');
-console.log(cityName.value);
+  // loop through temps to assign the key if the temperature is greater than the value
+  for (let i=0; i<temps.length; i++) {
+    if (temperature > temps[i][1]) {
+      return tempCat = temps[i][0];
+    }
+  }
+}
+
+// takes the weather object and specifies if the day is snowy, rainy, cloudy, partly sunny, or sunny
+const conditionCategory = function(weatherObject) {
+  // minimum probability to mark a day as rainy/snowy
+  let minimalProbabilityPrec = 0.3;
+
+  // minimum probabilities to mark a day as cloudy vs partially cloudy
+  let cloudyProbability = 0.7;
+  let partlyProbability = 0.2;
+
+  if (weatherObject.snowChance > minimalProbabilityPrec) {
+    return 'snowy';
+  } else if (weatherObject.rainChance > minimalProbabilityPrec) {
+    return 'rainy';
+  } else if (weatherObject.cloudCover > cloudyProbability) {
+    return 'cloudy';
+  } else if (weatherObject.cloudCover > partlyProbability) {
+    return 'partly sunny'
+  } else {
+    return 'sunny'
+  }
+}
+
+// capitalize first letter
+const capitalize = function(s) {
+  if (typeof s !== 'string') return ''
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
+// take the two weather objects and reflect a description of what is happening today.
+const weatherDescriptionText = function(weatherDescriptors, weatherObject) {
+  const a = weatherDescriptors.conditionDescription
+  const beginningText = `${capitalize(weatherDescriptors.dayTimeDescription)} day. ${capitalize(weatherDescriptors.nightTimeDescription)} night.`
+
+  if (a === 'sunny') {
+    return `${beginningText} Sunny.`
+  } else if (a === 'partly sunny') {
+    return `${beginningText} Partly Sunny (${weatherObject.cloudCover}% cloud cover).`
+  } else if (a === 'cloudy') {
+    return `${beginningText} Overcast (${weatherObject.cloudCover}% cloud cover).`
+  } else if (a === 'rainy') {
+    return `${beginningText} Likely rainy (${weatherObject.rainChance}% chance).`
+  } else if (a === 'snowy') {
+    return `${beginningText} Likely snowy (${weatherObject.snowChance}% chance).`
+  }
+}
+
+
+const createWeatherObject = function(weatherDataParsed) {
+  return {
+    currentFeelsLike: kelvinConverter(weatherDataParsed.current.feels_like),
+    dayFeelsLike: kelvinConverter(weatherDataParsed.daily[0].feels_like.day),
+    nightFeelsLike: kelvinConverter(weatherDataParsed.daily[0].feels_like.night),
+    currentActual: kelvinConverter(weatherDataParsed.current.temp),
+    dayActual: kelvinConverter(weatherDataParsed.daily[0].temp.day),
+    nightActual: kelvinConverter(weatherDataParsed.daily[0].temp.eve),
+    rainChance: weatherDataParsed.daily[0].rain,
+    snowChance: weatherDataParsed.daily[0].snow,
+    cloudCover: weatherDataParsed.daily[0].clouds,
+  }
+}
+
+const weatherDescriptors = function(weatherObj) {
+  // specifies temperature is based on the "feels like" temp
+  let dayTemp = weatherObj.dayFeelsLike;
+  let nightTemp = weatherObj.nightFeelsLike;
+  
+  return {
+    dayTimeDescription: temperatureCategory(dayTemp, heatCategories),
+    nightTimeDescription: temperatureCategory(nightTemp, heatCategories),
+    conditionDescription: conditionCategory(weatherObj),
+  }
+}
+
+
+
+// final function to run things
+const executeWeather = function() {
+
+  pullWeatherObject().then(function(success) {
+    const weatherObjectValue = createWeatherObject(success);
+    const weatherDescriptorsValue = weatherDescriptors(weatherObjectValue);
+    
+    // Text value that needs to spit out
+    const weatherDescriptionTextValue = weatherDescriptionText(weatherDescriptorsValue, weatherObjectValue);
+    
+    // TODO Need to add more code - have to build out section that spits out array with clothing items
+    
+  })
+}
+
+executeWeather();
+
+
+// console.log(Geolocation.getCurrentPosition());
+
+// var cityName = document.getElementById('city');
+// console.log(cityName.value);
 
 
 // weather pack: https://www.flaticon.com/packs/weather-76
-
-{/* <svg width="883px" height="584px" viewBox="0 0 883 584" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <defs>
-        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a">
-          <stop stop-color="#F7FAFC" offset="0%"></stop>
-          <stop stop-color="#DFEBF7" offset="100%"></stop>
-        </linearGradient>
-      </defs>
-      <path d="M835.746-2.683c58.652 62.415 62.704 127.241 12.158 194.48C772.084 292.655 402.786 394.5 283.349 387.5 203.725 382.833 108.61 449-2 586V-14L835.746-2.683z" fill="url(#a)" fill-rule="evenodd"></path>
-    </svg> */}
