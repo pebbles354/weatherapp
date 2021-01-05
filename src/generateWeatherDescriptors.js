@@ -1,11 +1,11 @@
-	const generateWeatherDescriptors = function() {
+const generateWeatherDescriptors = function() {
 	
 	// weather Description that we can edit
 	const heatCategories = function() {
 		return {
 			hot: 90,
 			warm: 70,
-			neutral: 50,
+			nice: 50,
 			chilly: 30,
 			freezing: -100,
 		}
@@ -46,29 +46,11 @@
 		}
 	}
 
-	const weatherDescriptors = function(weatherObj) {
-		// specifies temperature is based on the "feels like" temp
-		let dayTemp = weatherObj.dayFeelsLike;
-		let nightTemp = weatherObj.nightFeelsLike;
-		
-		return {
-			dayTimeDescription: temperatureCategory(dayTemp, heatCategories),
-			nightTimeDescription: temperatureCategory(nightTemp, heatCategories),
-			conditionDescription: conditionCategory(weatherObj),
-		}
-	}
 
-
-	// capitalize first letter
-	const capitalize = function(s) {
-		if (typeof s !== 'string') return ''
-		return s.charAt(0).toUpperCase() + s.slice(1)
-	}
-
-	// take the two weather objects and reflect a description of what is happening today.
-	const weatherDescriptionText = function(weatherDescriptors, weatherObject) {
-		const a = weatherDescriptors.conditionDescription
-		const beginningText = `${capitalize(weatherDescriptors.dayTimeDescription)} day. ${capitalize(weatherDescriptors.nightTimeDescription)} night.`
+	// take the two weather properties and reflect a description of what is happening today.
+	const weatherDescriptionTextCreator = function(condition, day, night, weatherObject) {
+		const a = condition
+		const beginningText = `${capitalize(day)} day. ${capitalize(night)} night.`
 
 		if (a === 'sunny') {
 			return `${beginningText} Sunny.`
@@ -83,9 +65,38 @@
 		}
 	}
 
+	const weatherDescriptors = function(weatherObj) {
+		// specifies temperature is based on the "feels like" temp
+		const dayTemp = Math.round(weatherObj.dayFeelsLike);
+		const nightTemp = Math.round(weatherObj.nightFeelsLike);
+		const currentTemp = Math.round(weatherObj.currentFeelsLike);
+
+		const dayDescription = temperatureCategory(dayTemp, heatCategories);
+		const nightDescription = temperatureCategory(nightTemp, heatCategories);
+		const condition = conditionCategory(weatherObj)
+
+		const weatherDescriptionText = weatherDescriptionTextCreator(condition, dayDescription, nightDescription, weatherObj);
+
+		return {
+			condition,
+			weatherDescriptionText,
+			dayTemp,
+			nightTemp,
+			currentTemp,
+		}
+	}
+
+
+	// capitalize first letter
+	const capitalize = function(s) {
+		if (typeof s !== 'string') return ''
+		return s.charAt(0).toUpperCase() + s.slice(1)
+	}
+
+
+
 	return {
-		weatherDescriptors,
-		weatherDescriptionText,
+		weatherDescriptors
 	}
 
 }();

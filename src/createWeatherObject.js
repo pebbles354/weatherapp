@@ -31,8 +31,7 @@ const createWeatherObject = function() {
 	};
 
 	return {
-		pullWeatherObject,
-		a: 1
+		pullWeatherObject
 	}
 }();
 

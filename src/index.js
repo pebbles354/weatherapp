@@ -1,19 +1,20 @@
 import createWeatherObject from './createWeatherObject';
 import generateWeatherDescriptors from './generateWeatherDescriptors';
+import updateDom from './updateDom';
 
 
 // final function to run things
 const executeWeather = function() {
   createWeatherObject.pullWeatherObject().then(function(result) {
     const weatherDescriptor = generateWeatherDescriptors.weatherDescriptors(result);
-    const weatherText = generateWeatherDescriptors.weatherDescriptionText(weatherDescriptor, result);
-    console.log(weatherDescriptor);
-    console.log(weatherText);
+    updateDom('Redwood City', weatherDescriptor);
   })
 }
 
-// console.log(generateWeatherDescriptors);
-// console.log(generateWeatherDescriptors.weatherDescriptors());
-
 executeWeather();
 
+// TODO: Create a clothing module to help us select what clothes to wear
+// TODO: Design the html page 
+// TODO: Responsive design 
+
+// Bug: Scroll issue on page
