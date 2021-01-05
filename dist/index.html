@@ -5,7 +5,7 @@
 		<link rel="stylesheet" href="./style.css" type="text/css">
 		<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 	</head>
-	<body class='sunny'>
+	<body class='cloudy'>
 		<header>
 			<svg class='header-icon' id='help' version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
 				<circle cx="256" cy="378.5" r="25"/>
@@ -40,7 +40,7 @@
 				<img class='weather-icon-image sun' src="./icons/sun.svg" alt='sun'>
 			</span>
 
-			<span class='circle lightgray visible' id='rainy'>
+			<span class='circle lightgray' id='rainy'>
 				<img class='weather-icon-image rain' src="./icons/rainCloud.svg" alt='rain'>
 			</span>
 
@@ -66,10 +66,15 @@
 			</ul>
 			<!-- TODO - here we will have another section. Each outfit i -->
 		</section>
-		<footer>
-			<a>Icons made by Freepik and Flaticon</a>
-			<a>Website by pebbles354</a>
-		</footer>
+		<section id="information" class='modal'>
+			<div class='modal-content'>
+				<span class="close">&times;</span>
+				<h3>Note: Temperatures listed reflect "Feels like", not actual temperatures.</h3>
+				<span>Icons sourced by Flaticon. Icons designed by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>, and <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a></span>
+				<span>Website by pebbles354</span>
+			</div>
+
+		</section>
 		<script type="text/javascript" src="./main.js"></script>
 	</body>
 
@@ -77,9 +82,9 @@
 
 
 <!--
-	question: <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+	question: <div>Icons made by  from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
-	sun: <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+	sun: <div>Icons made by  from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 	
 
@@ -90,14 +95,4 @@
 	If width < 950 then switch to mobile view
 		- weather section is 80%
 		- sun section is "squashed" to the right
-
-
-
-	make dynamic
-
-	edit following id's:
-	- current-temperature
-	- day-temp
-	- night-temp
-	- weather-description-text
 -->

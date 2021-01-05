@@ -71,8 +71,8 @@ const generateWeatherDescriptors = function() {
 		const nightTemp = Math.round(weatherObj.nightFeelsLike);
 		const currentTemp = Math.round(weatherObj.currentFeelsLike);
 
-		const dayDescription = temperatureCategory(dayTemp, heatCategories);
-		const nightDescription = temperatureCategory(nightTemp, heatCategories);
+		const dayDescription = temperatureCategory(weatherObj.dayFeelsLike, heatCategories);
+		const nightDescription = temperatureCategory(weatherObj.nightFeelsLike, heatCategories);
 		const condition = conditionCategory(weatherObj)
 
 		const weatherDescriptionText = weatherDescriptionTextCreator(condition, dayDescription, nightDescription, weatherObj);

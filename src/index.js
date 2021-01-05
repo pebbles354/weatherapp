@@ -1,6 +1,7 @@
 import createWeatherObject from './createWeatherObject';
 import generateWeatherDescriptors from './generateWeatherDescriptors';
 import updateDom from './updateDom';
+import modalFunctionality from './modalFunctionality'
 
 
 // final function to run things
@@ -11,10 +12,12 @@ const executeWeather = function() {
   })
 }
 
+modalFunctionality();
 executeWeather();
 
 // TODO: Create a clothing module to help us select what clothes to wear
-// TODO: Design the html page 
+// TODO: Build out functionality for info and location bar
+// TODO: Module to search for a new location
 // TODO: Responsive design 
 
-// Bug: Scroll issue on page
+// TODO: Store current city + weather descriptor in storage, so we dont have to wait for api pull when we load page

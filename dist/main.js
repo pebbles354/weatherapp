@@ -136,8 +136,8 @@ const generateWeatherDescriptors = function() {
 		const nightTemp = Math.round(weatherObj.nightFeelsLike);
 		const currentTemp = Math.round(weatherObj.currentFeelsLike);
 
-		const dayDescription = temperatureCategory(dayTemp, heatCategories);
-		const nightDescription = temperatureCategory(nightTemp, heatCategories);
+		const dayDescription = temperatureCategory(weatherObj.dayFeelsLike, heatCategories);
+		const nightDescription = temperatureCategory(weatherObj.nightFeelsLike, heatCategories);
 		const condition = conditionCategory(weatherObj)
 
 		const weatherDescriptionText = weatherDescriptionTextCreator(condition, dayDescription, nightDescription, weatherObj);
@@ -180,6 +180,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _createWeatherObject__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createWeatherObject */ "./src/createWeatherObject.js");
 /* harmony import */ var _generateWeatherDescriptors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./generateWeatherDescriptors */ "./src/generateWeatherDescriptors.js");
 /* harmony import */ var _updateDom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./updateDom */ "./src/updateDom.js");
+/* harmony import */ var _modalFunctionality__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modalFunctionality */ "./src/modalFunctionality.js");
+
 
 
 
@@ -193,13 +195,61 @@ const executeWeather = function() {
   })
 }
 
+;(0,_modalFunctionality__WEBPACK_IMPORTED_MODULE_3__.default)();
 executeWeather();
 
 // TODO: Create a clothing module to help us select what clothes to wear
-// TODO: Design the html page 
+// TODO: Build out functionality for info and location bar
+// TODO: Module to search for a new location
 // TODO: Responsive design 
 
-// Bug: Scroll issue on page
+// TODO: Store current city + weather descriptor in storage, so we dont have to wait for api pull when we load page
+
+
+/***/ }),
+
+/***/ "./src/modalFunctionality.js":
+/*!***********************************!*\
+  !*** ./src/modalFunctionality.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+// Get the modal
+var modal = document.getElementById("information");
+
+// Get the button that opens the modal
+var btn = document.getElementById("help");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+
+const modalFunctionality = function() {
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+    modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+    }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modalFunctionality);
 
 /***/ }),
 
@@ -225,7 +275,6 @@ const removeVisibleTag = function() {
     const allIcons = document.getElementsByClassName('circle');
     for (let i=0; i < allIcons.length; i++) {
         allIcons[i].classList.remove('visible');
-        console.log(allIcons[i])
     }
 }
 

@@ -10,7 +10,6 @@ const removeVisibleTag = function() {
     const allIcons = document.getElementsByClassName('circle');
     for (let i=0; i < allIcons.length; i++) {
         allIcons[i].classList.remove('visible');
-        console.log(allIcons[i])
     }
 }
 
