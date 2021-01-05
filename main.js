@@ -45,8 +45,7 @@ const createWeatherObject = function() {
 	};
 
 	return {
-		pullWeatherObject,
-		a: 1
+		pullWeatherObject
 	}
 }();
 
@@ -64,14 +63,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-	const generateWeatherDescriptors = function() {
+const generateWeatherDescriptors = function() {
 	
 	// weather Description that we can edit
 	const heatCategories = function() {
 		return {
 			hot: 90,
 			warm: 70,
-			neutral: 50,
+			nice: 50,
 			chilly: 30,
 			freezing: -100,
 		}
@@ -112,29 +111,11 @@ __webpack_require__.r(__webpack_exports__);
 		}
 	}
 
-	const weatherDescriptors = function(weatherObj) {
-		// specifies temperature is based on the "feels like" temp
-		let dayTemp = weatherObj.dayFeelsLike;
-		let nightTemp = weatherObj.nightFeelsLike;
-		
-		return {
-			dayTimeDescription: temperatureCategory(dayTemp, heatCategories),
-			nightTimeDescription: temperatureCategory(nightTemp, heatCategories),
-			conditionDescription: conditionCategory(weatherObj),
-		}
-	}
 
-
-	// capitalize first letter
-	const capitalize = function(s) {
-		if (typeof s !== 'string') return ''
-		return s.charAt(0).toUpperCase() + s.slice(1)
-	}
-
-	// take the two weather objects and reflect a description of what is happening today.
-	const weatherDescriptionText = function(weatherDescriptors, weatherObject) {
-		const a = weatherDescriptors.conditionDescription
-		const beginningText = `${capitalize(weatherDescriptors.dayTimeDescription)} day. ${capitalize(weatherDescriptors.nightTimeDescription)} night.`
+	// take the two weather properties and reflect a description of what is happening today.
+	const weatherDescriptionTextCreator = function(condition, day, night, weatherObject) {
+		const a = condition
+		const beginningText = `${capitalize(day)} day. ${capitalize(night)} night.`
 
 		if (a === 'sunny') {
 			return `${beginningText} Sunny.`
@@ -149,9 +130,38 @@ __webpack_require__.r(__webpack_exports__);
 		}
 	}
 
+	const weatherDescriptors = function(weatherObj) {
+		// specifies temperature is based on the "feels like" temp
+		const dayTemp = Math.round(weatherObj.dayFeelsLike);
+		const nightTemp = Math.round(weatherObj.nightFeelsLike);
+		const currentTemp = Math.round(weatherObj.currentFeelsLike);
+
+		const dayDescription = temperatureCategory(dayTemp, heatCategories);
+		const nightDescription = temperatureCategory(nightTemp, heatCategories);
+		const condition = conditionCategory(weatherObj)
+
+		const weatherDescriptionText = weatherDescriptionTextCreator(condition, dayDescription, nightDescription, weatherObj);
+
+		return {
+			condition,
+			weatherDescriptionText,
+			dayTemp,
+			nightTemp,
+			currentTemp,
+		}
+	}
+
+
+	// capitalize first letter
+	const capitalize = function(s) {
+		if (typeof s !== 'string') return ''
+		return s.charAt(0).toUpperCase() + s.slice(1)
+	}
+
+
+
 	return {
-		weatherDescriptors,
-		weatherDescriptionText,
+		weatherDescriptors
 	}
 
 }();
@@ -169,6 +179,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _createWeatherObject__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createWeatherObject */ "./src/createWeatherObject.js");
 /* harmony import */ var _generateWeatherDescriptors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./generateWeatherDescriptors */ "./src/generateWeatherDescriptors.js");
+/* harmony import */ var _updateDom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./updateDom */ "./src/updateDom.js");
+
 
 
 
@@ -177,18 +189,65 @@ __webpack_require__.r(__webpack_exports__);
 const executeWeather = function() {
   _createWeatherObject__WEBPACK_IMPORTED_MODULE_0__.default.pullWeatherObject().then(function(result) {
     const weatherDescriptor = _generateWeatherDescriptors__WEBPACK_IMPORTED_MODULE_1__.default.weatherDescriptors(result);
-    const weatherText = _generateWeatherDescriptors__WEBPACK_IMPORTED_MODULE_1__.default.weatherDescriptionText(weatherDescriptor, result);
-    console.log(weatherDescriptor);
-    console.log(weatherText);
+    (0,_updateDom__WEBPACK_IMPORTED_MODULE_2__.default)('Redwood City', weatherDescriptor);
   })
 }
 
-// console.log(generateWeatherDescriptors);
-// console.log(generateWeatherDescriptors.weatherDescriptors());
-
 executeWeather();
 
+// TODO: Create a clothing module to help us select what clothes to wear
+// TODO: Design the html page 
+// TODO: Responsive design 
 
+// Bug: Scroll issue on page
+
+/***/ }),
+
+/***/ "./src/updateDom.js":
+/*!**************************!*\
+  !*** ./src/updateDom.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+const cityName = document.getElementById('city-name');
+const currentTemp = document.getElementById('current-temperature');
+const dayTemp = document.getElementById('day-temp');
+const nightTemp = document.getElementById('night-temp');
+const weatherDescription = document.getElementById('weather-description-text');
+
+
+
+const removeVisibleTag = function() {
+    const allIcons = document.getElementsByClassName('circle');
+    for (let i=0; i < allIcons.length; i++) {
+        allIcons[i].classList.remove('visible');
+        console.log(allIcons[i])
+    }
+}
+
+
+const updateDom = function(city, weatherObj) {
+    
+    // change all text
+    cityName.innerText = city;
+    currentTemp.innerText = weatherObj.currentTemp;
+    dayTemp.innerText = weatherObj.dayTemp;
+    nightTemp.innerText = weatherObj.nightTemp;
+    weatherDescription.innerText = weatherObj.weatherDescriptionText;
+    
+    //change the icon/background
+    const icon = document.getElementById(weatherObj.condition);
+    removeVisibleTag();
+
+    document.body.classList = weatherObj.condition;
+    icon.classList.add('visible');
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (updateDom);
 
 /***/ })
 

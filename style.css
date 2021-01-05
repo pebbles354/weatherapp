@@ -1,0 +1,207 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* This will change dynamically */
+    background-repeat: no-repeat;
+    /* position: absolute; */
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', Helvetica, sans-serif;
+}
+
+    body.sunny {
+        background: linear-gradient(180deg, #EEDEB8 0%, rgba(255, 255, 255, 0) 100%), #FAB96D;
+    }
+
+    body.rainy {
+        background: radial-gradient(50% 50% at 50% 50%, #EDF2FF 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #CFE5FF 20.83%, rgba(255, 255, 255, 0) 100%), #A3C8FF;
+    }
+
+    body.snowy {
+        background: linear-gradient(180deg, #EEF9FF 0%, rgba(255, 255, 255, 0) 100%), #BBE2F8;
+    }
+
+    body.cloudy {
+        background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #212F45 0%, rgba(255, 255, 255, 0) 100%), #C1D2EB;
+    }
+
+header {
+    background: rgba(255, 255, 255, 0.15);
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin: 0;
+    padding: 16px 0 0 0;
+    z-index: 1000;
+}
+
+    header > .header-icon {
+        fill: grey;
+        height: 33px; 
+        width: auto;
+        padding: 8px 0 8px 0;
+        position: relative;
+        width: calc(10%);
+        float: left;
+    }
+
+    header > .header-icon:hover {
+        fill: black;
+    }
+
+    #help {
+        float: left;
+    }
+
+    #map {
+        float: right;
+    }
+
+    header > .header-text {
+        color: grey;
+        width: 80%;
+        font-size: 20px;
+        padding: 10px 0 10px 0;
+        text-align: center;
+        position: relative;
+        float: left;
+    }
+
+section {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    
+}
+
+
+section#weather {
+    width: 40%;
+    /* background: red; */
+    padding: 60px 0 50px 4vw;
+    float: left;
+    
+}
+
+    #weather > h2 {
+        font-size: 60px;
+    }
+
+    #weather > h1 {
+        font-size: 100px;
+        padding: 10px 0;
+    }
+
+
+        #weather > div > .temp-detail-icon {
+            height: 30px;
+            width: auto;
+            vertical-align: bottom;
+            margin: 0 0 3px 5px;
+
+        }
+
+        #weather > div > span {
+            font-size: 30px;
+            vertical-align: top;
+            margin-right: 20px;
+        }
+
+        
+
+    #weather > span {
+        padding: 20px 0 0 5px;
+        position: relative;
+        display: inline-block;
+        font-size: 18px;
+    }
+
+    #weather > h3 {
+        padding: 30px 0 0 0;
+        color: gray;
+    }
+
+
+/* Formatting for the weather icon */
+section#weather-icon {
+    /* background: green; */
+    height: 403px;
+    width: calc(60% - 4vw);
+    position: relative;
+    float: right;
+}
+
+    #weather-icon > .circle {
+        position: relative;
+        width: 1000px;
+        height: 1000px;
+        margin: -300px 0 0 45%;
+        transform: translate(-50%);
+        margin-right: auto;
+        z-index: -1;
+        display: none;
+    }
+
+    #weather-icon > .visible {
+        display: block;
+    }
+
+    #weather-icon > .yellow {
+        background: radial-gradient(50% 50% at 50% 50%, rgba(251, 255, 60, 0.4) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    #weather-icon > .lightgray {
+        background: radial-gradient(50% 50% at 50% 50%, rgba(155, 164, 174, 0.4) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    #weather-icon > .white {
+        background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 242, 0.4) 0%, rgba(255, 255, 255, 0) 0.01%), radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    #weather-icon > .darkgray {
+        background: radial-gradient(50% 50% at 50% 50%, rgba(65, 65, 65, 0.4) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    .weather-icon-image {
+        height: 300px;
+        width: auto;
+        margin: auto;
+        position: relative;
+        display: block;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+
+        .weather-icon-image.sun {
+            height: 300px;
+        }
+
+        .weather-icon-image.rain {
+            height: 270px;
+        }
+        
+        .weather-icon-image.snow {
+            height: 250px;
+        }
+
+        .weather-icon-image.clouds {
+            height: 330px;
+        }
+
+
+section#clothing{
+    width: 100%;
+    padding: 0 0 50px 4vw;
+}
+
+    #clothing > ul {
+        display: inline;
+    }
+
+    li {
+        display: inline;
+    }
