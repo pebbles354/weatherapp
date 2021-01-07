@@ -78,6 +78,8 @@ const generateWeatherDescriptors = function() {
 		const weatherDescriptionText = weatherDescriptionTextCreator(condition, dayDescription, nightDescription, weatherObj);
 
 		return {
+			dayDescription,
+			nightDescription,
 			condition,
 			weatherDescriptionText,
 			dayTemp,

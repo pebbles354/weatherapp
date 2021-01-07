@@ -26,8 +26,7 @@ body {
     }
 
     body.cloudy {
-        background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #212F45 0%, rgba(255, 255, 255, 0) 100%), #C1D2EB;
-    }
+        background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #D7D7D7;    }
 
 header {
     background: rgba(255, 255, 255, 0.15);
@@ -82,7 +81,7 @@ section {
 section#weather {
     width: 40%;
     /* background: red; */
-    padding: 60px 0 50px 4vw;
+    padding: 60px 0 15px 4vw;
     float: left;
     
 }
@@ -122,6 +121,7 @@ section#weather {
 
     #weather > h3 {
         padding: 30px 0 0 0;
+        margin: 0;
         color: gray;
     }
 
@@ -195,16 +195,59 @@ section#weather-icon {
 
 section#clothing{
     width: 100%;
-    padding: 0 0 50px 4vw;
+    padding: 0 0 50px 0;
 }
+    #clothing > h4 {
+        font-size: 24px;
+        padding: 0 0 10px 4vw;
+    }
 
-    #clothing > ul {
-        display: inline;
+    .clothing-container {
+        background: rgba(255, 255, 255, 0.25);
+        width: 100%
+    }
+
+    ul {
+        padding: 0 0 0 4vw;
     }
 
     li {
         display: inline;
     }
+        .clothing {
+            padding: 20px 20px 20px 20px;
+            width: 180px;
+            height: auto;
+            display: inline-block;
+        }
+
+        .clothing-small {
+            height: 90px;
+            padding: 0
+        }
+
+        .double-container {
+            width: 180px;
+            height: 180px;
+            display: inline-block;
+        }
+        
+        .clothing > img {
+            width: 180px;
+            height: auto
+        }
+
+        #bottoms > img {
+            width: 180px;
+        }
+
+        #accessories > img {
+            height: 80px;
+        }
+
+        #accessories2 > img {
+            height: 80px;
+        }
 
 /*information modal*/
     .modal {
