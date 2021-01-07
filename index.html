@@ -55,15 +55,18 @@
 
 		<section id="clothing">
 			<h4>Todays Outfit</h4>
-			<ul>
-				<li id="jacket">Jacket</li>
-				<li id="shirt"></li>
-				<li id="pants">Pants</li>
-				<li id="dress">Dress</li>
-				<li id="scarf">Scarf</li>
-				<li id="hat">Hat</li>
-				<li id="umbrella">Umbrella</li>
-			</ul>
+			<div class="clothing-container">
+				<ul>
+					<li id="jackets" class="clothing"><img src="./icons/clothing/jackets/heavy/201-coat-33.svg" alt="${outfitItems.subcategory}"></li>
+					<li id="tops" class="clothing"></li>
+					<li id="bottoms" class="clothing">Pants</li>
+					<div class="double-container">
+						<li id="accessories" class="clothing clothing-small"> Scarf</li>
+						<li id="accessories2" class="clothing clothing-small">Hat</li>
+					</div>
+					<li id="seasonal" class="clothing">Umbrella</li>
+				</ul>
+			</div>
 			<!-- TODO - here we will have another section. Each outfit i -->
 		</section>
 		<section id="information" class='modal'>
