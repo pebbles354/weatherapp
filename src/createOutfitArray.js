@@ -15,22 +15,22 @@ const tempGuide = [
     },
     {
         temp: 'nice',
-        tops: ['short_sleve_shirts'],
+        tops: ['short_sleve_shirts', 'dresses'],
         bottoms: ['long', 'skirts_med'],
         jackets: ['medium'],
         accessories: ['scarves'],
     },
     {
         temp: 'chilly',
-        tops: ['short_sleve_shirts', 'dresses'],
+        tops: ['short_sleve_shirts'],
         bottoms: ['long'],
         jackets: ['heavy', 'medium'],
         accessories: ['scarves'],
     },
     {
         temp: 'freezing',
-        tops: ['short_sleve_shirts', 'dresses'],
-        bottoms: ['shorts'],
+        tops: ['short_sleve_shirts'],
+        bottoms: ['long'],
         jackets: ['heavy'],
         accessories: ['scarves'],
     }
@@ -131,13 +131,14 @@ const createOutfitArray = function(weatherDescriptor) {
             finalClothingArray.push(bottom);
         }
 
+        if (weatherDescriptor.condition === "rainy") {
+            finalClothingArray.push (pickRandomClothingItems('seasonal', 'umbrella', clothingArray));
+            return;
+        }
+
         // push an accessory
         const accessories = pickClothingItem(nightWeatherObject, 'accessories');
         finalClothingArray.push(accessories);
-
-        if (weatherDescriptor.condition === "rainy") {
-            finalClothingArray.push (pickRandomClothingItems('accessories', 'umbrella', clothingArray));
-        }
 
         if (weatherDescriptor.condition === "sunny") {
             finalClothingArray.push (pickRandomClothingItems('accessories2', 'hat', clothingArray));

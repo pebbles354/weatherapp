@@ -3,31 +3,41 @@
   	<head>
 		<title>Weather app</title>
 		<link rel="stylesheet" href="./style.css" type="text/css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 	</head>
 	<body class='cloudy'>
 		<header>
-			<svg class='header-icon' id='help' version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-				<circle cx="256" cy="378.5" r="25"/>
-				<path d="M256,0C114.516,0,0,114.497,0,256c0,141.484,114.497,256,256,256c141.484,0,256-114.497,256-256 C512,114.516,397.503,0,256,0z M256,472c-119.377,0-216-96.607-216-216c0-119.377,96.607-216,216-216 c119.377,0,216,96.607,216,216C472,375.377,375.393,472,256,472z"/>
-				<path d="M256,128.5c-44.112,0-80,35.888-80,80c0,11.046,8.954,20,20,20s20-8.954,20-20c0-22.056,17.944-40,40-40c22.056,0,40,17.944,40,40c0,22.056-17.944,40-40,40c-11.046,0-20,8.954-20,20v50c0,11.046,8.954,20,20,20c11.046,0,20-8.954,20-20v-32.531c34.466-8.903,60-40.26,60-77.469C336,164.388,300.112,128.5,256,128.5z"/>
-			</svg>
+			<div class='icon-container help'>
+				<svg class='header-icon' id='help' version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+					<circle cx="256" cy="378.5" r="25"/>
+					<path d="M256,0C114.516,0,0,114.497,0,256c0,141.484,114.497,256,256,256c141.484,0,256-114.497,256-256 C512,114.516,397.503,0,256,0z M256,472c-119.377,0-216-96.607-216-216c0-119.377,96.607-216,216-216 c119.377,0,216,96.607,216,216C472,375.377,375.393,472,256,472z"/>
+					<path d="M256,128.5c-44.112,0-80,35.888-80,80c0,11.046,8.954,20,20,20s20-8.954,20-20c0-22.056,17.944-40,40-40c22.056,0,40,17.944,40,40c0,22.056-17.944,40-40,40c-11.046,0-20,8.954-20,20v50c0,11.046,8.954,20,20,20c11.046,0,20-8.954,20-20v-32.531c34.466-8.903,60-40.26,60-77.469C336,164.388,300.112,128.5,256,128.5z"/>
+				</svg>
+			</div>
+
 			<span class='header-text' id='date'>Monday, Jan 1</span>
-			<svg version="1.1" class='header-icon' id="map" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-				<path d="M256,0C156.748,0,76,80.748,76,180c0,33.534,9.289,66.26,26.869,94.652l142.885,230.257 c2.737,4.411,7.559,7.091,12.745,7.091c0.04,0,0.079,0,0.119,0c5.231-0.041,10.063-2.804,12.75-7.292L410.611,272.22 C427.221,244.428,436,212.539,436,180C436,80.748,355.252,0,256,0z M384.866,256.818L258.272,468.186l-129.905-209.34 C113.734,235.214,105.8,207.95,105.8,180c0-82.71,67.49-150.2,150.2-150.2S406.1,97.29,406.1,180 C406.1,207.121,398.689,233.688,384.866,256.818z"/>
-				<path d="M256,90c-49.626,0-90,40.374-90,90c0,49.309,39.717,90,90,90c50.903,0,90-41.233,90-90C346,130.374,305.626,90,256,90z M256,240.2c-33.257,0-60.2-27.033-60.2-60.2c0-33.084,27.116-60.2,60.2-60.2s60.1,27.116,60.1,60.2 C316.1,212.683,289.784,240.2,256,240.2z"/>
-			</svg>
+			
+			<div class='icon-container map'>
+				<span id="search-bar">
+					<input id="city-search-bar" placeholder='city name, country name' class='location-search'>
+				</span>
+				<svg version="1.1" class='header-icon' id="map" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+					<path d="M256,0C156.748,0,76,80.748,76,180c0,33.534,9.289,66.26,26.869,94.652l142.885,230.257 c2.737,4.411,7.559,7.091,12.745,7.091c0.04,0,0.079,0,0.119,0c5.231-0.041,10.063-2.804,12.75-7.292L410.611,272.22 C427.221,244.428,436,212.539,436,180C436,80.748,355.252,0,256,0z M384.866,256.818L258.272,468.186l-129.905-209.34 C113.734,235.214,105.8,207.95,105.8,180c0-82.71,67.49-150.2,150.2-150.2S406.1,97.29,406.1,180 C406.1,207.121,398.689,233.688,384.866,256.818z"/>
+					<path d="M256,90c-49.626,0-90,40.374-90,90c0,49.309,39.717,90,90,90c50.903,0,90-41.233,90-90C346,130.374,305.626,90,256,90z M256,240.2c-33.257,0-60.2-27.033-60.2-60.2c0-33.084,27.116-60.2,60.2-60.2s60.1,27.116,60.1,60.2 C316.1,212.683,289.784,240.2,256,240.2z"/>
+				</svg>
+			</div>
 		</header>
 
-		<!--Section with all the text weather information-->
+		<!-- Section with all the text weather information -->
 		<section id="weather">
-			<h2 id='city-name'>Redwood City</h1>
-			<h1 id='current-temperature'>38°</h1>
+			<h2 id='city-name'></h1>
+			<span><a id= 'current-temperature'></a><a>°</a></span>
 			<div class='temp-details'>
 				<img class='temp-detail-icon' src='./icons/sunAlt.svg' alt='sun' />
-				<span><a id='day-temp'>18</a><a>°</a></span>
+				<span><a id='day-temp'></a><a>°</a></span>
 				<img class='temp-detail-icon' src='./icons/moon.svg' alt='sun' />
-				<span><a id='night-temp'>10</a><a>°</a></span>
+				<span><a id='night-temp'></a><a>°</a></span>
 			</div>
 			<span id='weather-description-text'>Hot day. Cool night. Likely rain (20%)</span>
 			<h3>____________________________</h3>
@@ -59,43 +69,27 @@
 				<ul>
 					<li id="jackets" class="clothing"><img src="./icons/clothing/jackets/heavy/201-coat-33.svg" alt="${outfitItems.subcategory}"></li>
 					<li id="tops" class="clothing"></li>
-					<li id="bottoms" class="clothing">Pants</li>
+					<li id="bottoms" class="clothing"></li>
 					<div class="double-container">
-						<li id="accessories" class="clothing clothing-small"> Scarf</li>
-						<li id="accessories2" class="clothing clothing-small">Hat</li>
+						<li id="accessories" class="clothing clothing-small"></li>
+						<li id="accessories2" class="clothing clothing-small"></li>
 					</div>
-					<li id="seasonal" class="clothing">Umbrella</li>
+					<li id="seasonal" class="clothing"></li>
 				</ul>
 			</div>
-			<!-- TODO - here we will have another section. Each outfit i -->
 		</section>
+
 		<section id="information" class='modal'>
 			<div class='modal-content'>
 				<span class="close">&times;</span>
 				<h3>Note: Temperatures listed reflect "Feels like", not actual temperatures.</h3>
 				<span>Icons sourced by Flaticon. Icons designed by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>, and <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a></span>
-				<span>Website by pebbles354</span>
+				<span>Website by pebbles354.</span>
 			</div>
 
 		</section>
+
 		<script type="text/javascript" src="./main.js"></script>
 	</body>
 
 </html>
-
-
-<!--
-	question: <div>Icons made by  from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-
-	sun: <div>Icons made by  from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-
-	
-
--->
-
-<!--
-	TODO
-	If width < 950 then switch to mobile view
-		- weather section is 80%
-		- sun section is "squashed" to the right
--->

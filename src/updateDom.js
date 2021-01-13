@@ -1,8 +1,12 @@
+import {format, utcToZonedTime} from 'date-fns-tz'
+
 const cityName = document.getElementById('city-name');
 const currentTemp = document.getElementById('current-temperature');
 const dayTemp = document.getElementById('day-temp');
 const nightTemp = document.getElementById('night-temp');
 const weatherDescription = document.getElementById('weather-description-text');
+const todaysDate = document.getElementById('date')
+const body = document.getElementsByTagName('body');
 
 const updateDom = function() {
     const removeVisibleTag = function() {
@@ -14,18 +18,29 @@ const updateDom = function() {
 
     const updateWeather = function(city, weatherObj) {
         
+        // city name to uppercase
+        const name = city.split(',')[0];
+        const cityNameCapital = name.charAt(0).toUpperCase() + name.slice(1)
+
+
+
         // change all text
-        cityName.innerText = city;
+        cityName.innerText = cityNameCapital;
         currentTemp.innerText = weatherObj.currentTemp;
         dayTemp.innerText = weatherObj.dayTemp;
         nightTemp.innerText = weatherObj.nightTemp;
         weatherDescription.innerText = weatherObj.weatherDescriptionText;
+        todaysDate.innerText = format(utcToZonedTime(new Date(), 'America/Los_Angeles'), 'EEEE,  MMM d');
         
         //change the icon/background
         const icon = document.getElementById(weatherObj.condition);
         removeVisibleTag();
 
-        document.body.classList = weatherObj.condition;
+        // update body color and display body
+        document.body.classList= weatherObj.condition;
+        document.body.classList.add('visible');
+
+        // make icons visible
         icon.classList.add('visible');
     }
 
@@ -33,6 +48,7 @@ const updateDom = function() {
         const outfitItems = document.getElementsByClassName('clothing');
         for (let i=0; i< outfitItems.length; i++) {          
               outfitItems[i].innerHTML  = ""
+              outfitItems[i].classList.add('hidden');
         }
     }
 
@@ -45,6 +61,7 @@ const updateDom = function() {
             newImage.setAttribute('src', outfitArray[i].source);
             newImage.setAttribute('alt', outfitArray[i].subcategory);
 
+            e.classList.remove('hidden');
             e.appendChild(newImage);
         }
     }

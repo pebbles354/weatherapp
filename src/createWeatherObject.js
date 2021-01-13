@@ -21,9 +21,23 @@ const createWeatherObject = function() {
 		}
 	};
 
+	let lat=1;
+	let lon=1;
+
+	// function to get the lat and long based on a city
+	async function getLatLong(value) {
+		const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${value}&limit=1&appid=a7d000bc83452f91d1c5f98b2327ab5a`, {mode: 'cors'});
+		const parsedApi = await response.json();
+		lat = parsedApi[0].lat;
+		lon = parsedApi[0].lon;
+	}
+
 	//async function to pull the current Weather from openweathermap api
-	async function pullWeatherObject() {
-		const weatherData = await fetch('https://api.openweathermap.org/data/2.5/onecall?lat=37.550201&lon=-121.980827&appid=a7d000bc83452f91d1c5f98b2327ab5a', {mode: 'cors'});
+	async function pullWeatherObject(city) {
+		
+		const latLong = await getLatLong(city);
+
+		const weatherData = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=a7d000bc83452f91d1c5f98b2327ab5a`, {mode: 'cors'});
 		const weatherDataParsed = await weatherData.json();
 		
 		// run function to parse the weather data into the info we need
