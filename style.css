@@ -6,11 +6,17 @@
 body {
     /* This will change dynamically */
     background-repeat: no-repeat;
+    width: 100vw;
     position: absolute;
     padding: 0;
     margin: 0;
     overflow-x: hidden;
     font-family: 'Lato', Helvetica, sans-serif;
+    display: none;
+}
+
+.visible {
+    display: block;
 }
 
     body.sunny {
@@ -26,42 +32,70 @@ body {
     }
 
     body.cloudy {
-        background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #D7D7D7;    }
+        background: linear-gradient(180deg, #FFFFFF 10%, rgba(255, 255, 255, 0) 100%), #D7D7D7;    
+        /* background: linear-gradient(180.01deg, #FFFFFF 14.59%, rgba(73, 71, 71, 0) 99.99%); */
+        /* background: linear-gradient(0deg, #D5D5D5 13.28%, rgba(207, 207, 207, 0) 100%), linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%); */
+    }
 
 header {
     background: rgba(255, 255, 255, 0.15);
     position: relative;
     height: 50px;
-    width: 100%;
+    width: 100vw;
     margin: 0;
     padding: 16px 0 0 0;
 }
 
-    header > .header-icon {
+    .icon-container {
+        width: 35%;
+        text-align: right;
+    }
+
+    .header-icon {
         fill: grey;
         height: 33px; 
         width: auto;
         padding: 8px 0 8px 0;
         position: relative;
-        width: calc(10%);
-        float: left;
     }
 
-    header > .header-icon:hover {
+    .header-icon:hover {
         fill: black;
+        cursor: pointer;
     }
 
-    #help {
-        float: left;
-    }
 
-    #map {
-        float: right;
-    }
+        #help {
+            float: left;
+            padding: 0 0 0 10%;
+        }
+
+        .location-search {
+            display: inline-block;
+            margin: 3px 10px 0 0;
+            box-sizing: border-box;
+            border-radius: 4px;
+            padding: 7px;
+            border: 1px solid #ccc;
+            background: rgb(223, 221, 221)
+        }
+
+        #map {
+            float: right;
+            padding: 0 10% 0 0;
+        }
+
+        .help{
+            float: left;
+        }
+
+        .map {
+            float: right;
+        }
 
     header > .header-text {
         color: grey;
-        width: 80%;
+        width: 30%;
         font-size: 20px;
         padding: 10px 0 10px 0;
         text-align: center;
@@ -79,10 +113,11 @@ section {
 
 
 section#weather {
-    width: 40%;
+    width: 40vw;
     /* background: red; */
     padding: 60px 0 15px 4vw;
     float: left;
+    /* background-color: green; */
     
 }
 
@@ -90,7 +125,7 @@ section#weather {
         font-size: 60px;
     }
 
-    #weather > h1 {
+    #weather > span > a {
         font-size: 100px;
         padding: 10px 0;
     }
@@ -129,10 +164,11 @@ section#weather {
 /* Formatting for the weather icon */
 section#weather-icon {
     /* background: green; */
-    height: 403px;
-    width: calc(60% - 4vw);
+    height: 417px;
+    width: 56vw;
     position: relative;
     float: right;
+    /* background-color: blue; */
 }
 
     #weather-icon > .circle {
@@ -163,7 +199,9 @@ section#weather-icon {
     }
 
     #weather-icon > .darkgray {
-        background: radial-gradient(50% 50% at 50% 50%, rgba(65, 65, 65, 0.4) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+        /* background: radial-gradient(50% 50% at 50% 50%, rgba(65, 65, 65, 0.4) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%); */
+        /* background: radial-gradient(50% 50% at 50% 50%, rgba(65, 65, 65, 0.4) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%); */
+        background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.55) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
     }
 
     .weather-icon-image {
@@ -194,41 +232,54 @@ section#weather-icon {
 
 
 section#clothing{
-    width: 100%;
-    padding: 0 0 50px 0;
+    width: 100vw;
+    padding: 0 0 0 0;
+    text-align: center;
+    /* background-color: red; */
 }
     #clothing > h4 {
         font-size: 24px;
-        padding: 0 0 10px 4vw;
+        padding: 10px 0 10px 4vw;
     }
 
     .clothing-container {
         background: rgba(255, 255, 255, 0.25);
-        width: 100%
+        width: 100%;
+        height: auto;
+        display: inline-block;
+        margin: 20px 0 0 0;
     }
 
     ul {
-        padding: 0 0 0 4vw;
+        padding: 15px 0 0 4vw;
     }
 
     li {
         display: inline;
     }
+
         .clothing {
             padding: 20px 20px 20px 20px;
-            width: 180px;
+            max-width: 180px;
             height: auto;
             display: inline-block;
         }
 
         .clothing-small {
             height: 90px;
-            padding: 0
+            padding: 0;
+            display: inline-block;
+        }
+
+        .hidden {
+            display: none;
         }
 
         .double-container {
-            width: 180px;
+            max-width: 180px;
             height: 180px;
+            padding: 0;
+            margin: 0;
             display: inline-block;
         }
         
@@ -249,6 +300,11 @@ section#clothing{
             height: 80px;
         }
 
+        #seasonal {
+            padding: 20px 20px 20px 0;
+            margin: 0 0 0 -30px;
+        }
+
 /*information modal*/
     .modal {
         display: none; /* Hidden by default */
@@ -256,7 +312,7 @@ section#clothing{
         z-index: 1; /* Sit on top */
         left: 0;
         top: 0;
-        width: 100%; /* Full width */
+        width: 100vw; /* Full width */
         height: 100%; /* Full height */
         overflow: auto; /* Enable scroll if needed */
         background-color: rgb(0,0,0); /* Fallback color */
@@ -292,3 +348,72 @@ section#clothing{
         text-decoration: none;
         cursor: pointer;
       }
+
+
+      /* Need to make adjustments here to account for if window is shrunk. Big bug is changing the header so that the location bar still shows. Also changing clothes so that they appear in two lines
+@media screen and (max-width: 1000px) {
+
+
+}
+*/
+
+@media screen and (max-width: 700px) {
+   body {
+       overflow-x: hidden;
+   }
+
+    /* header css */
+    .header-text {
+        display: none;
+    }
+
+    .help {
+        width: 10%;
+    }
+
+    #help {
+        padding: 0 0 0 10px;
+    }
+
+    .map {
+        width: 90%
+    }
+
+    #map {
+        padding: 0 10px 0 0;
+    }
+
+    /* weather section */
+    section#weather {
+        width: 70vw;
+    }
+
+    #weather-description-text {
+        width: 133%
+    }
+
+
+    /* weather icon */
+    section#weather-icon {
+        position: relative;
+        width: 26vw;
+    }
+
+        #weather-icon > .circle {
+            position: relative;
+            margin: -320px 0 0 90%;
+        }
+
+        .weather-icon-image {
+            position: relative;
+            width: 230px;
+        }
+
+    /*outfit css */
+    #seasonal {
+        padding: 20px 20px 20px 20px;
+        margin: 0 0 0 0;
+    }
+
+    /* modal */
+}
