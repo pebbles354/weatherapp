@@ -4419,7 +4419,7 @@ const createWeatherObject = function() {
 
 	// function to get the lat and long based on a city
 	async function getLatLong(value) {
-		const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${value}&limit=1&appid=a7d000bc83452f91d1c5f98b2327ab5a`, {mode: 'cors'});
+		const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${value}&limit=1&appid=a7d000bc83452f91d1c5f98b2327ab5a`, {mode: 'cors'});
 		const parsedApi = await response.json();
 		lat = parsedApi[0].lat;
 		lon = parsedApi[0].lon;
