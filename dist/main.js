@@ -4465,7 +4465,16 @@ const determineLocation = function() {
     location = position.coords;
     }
 
-    navigator.geolocation.getCurrentPosition(showPosition);
+    const error = function() {
+        location = undefined;
+    }
+
+    if(!navigator.geolocation) {
+        error();
+      } else {
+        status.textContent = 'Locating…';
+        navigator.geolocation.getCurrentPosition(showPosition, error);
+      }
 
     const pullSavedLocation = function() {
         const storedLocation = localStorage.getItem('city');
