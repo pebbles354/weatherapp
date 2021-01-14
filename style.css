@@ -115,7 +115,7 @@ section {
 section#weather {
     width: 40vw;
     /* background: red; */
-    padding: 60px 0 15px 4vw;
+    padding: 30px 0 15px 4vw;
     float: left;
     /* background-color: green; */
     
@@ -127,7 +127,6 @@ section#weather {
 
     #weather > span > a {
         font-size: 100px;
-        padding: 10px 0;
     }
 
 
@@ -139,6 +138,9 @@ section#weather {
 
         }
 
+        #weather > .current-temp {
+            padding: 0 0 10px 0;
+        }
         #weather > div > span {
             font-size: 30px;
             vertical-align: top;
@@ -357,7 +359,7 @@ section#clothing{
 }
 */
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
    body {
        overflow-x: hidden;
    }
@@ -392,22 +394,41 @@ section#clothing{
         width: 133%
     }
 
+    #city-name {
+        width: 130%;
+    }
+
 
     /* weather icon */
     section#weather-icon {
         position: relative;
         width: 26vw;
     }
-
+ 
         #weather-icon > .circle {
-            position: relative;
-            margin: -320px 0 0 90%;
+            margin: -315px 0 0 90%;
+        } 
+
+        #weather-icon > .darkgray {
+            margin: -305px 0 0 70%;
+            background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.45) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+
         }
 
         .weather-icon-image {
             position: relative;
             width: 230px;
         }
+
+        .snow{
+            width: 180px;
+        }
+
+        .rain {
+            width: 200px;
+        }
+
+    
 
     /*outfit css */
     #seasonal {
