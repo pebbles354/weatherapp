@@ -4472,7 +4472,7 @@ const determineLocation = function() {
     if(!navigator.geolocation) {
         error();
       } else {
-        status.textContent = 'Locating…';
+        console.log('Locating…');
         navigator.geolocation.getCurrentPosition(showPosition, error);
       }
 
